@@ -14,7 +14,8 @@ const PostsWidget = ({ userId, isProfile = false }) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    dispatch(setPosts({ posts: data }));
+    const sortedPosts = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    dispatch(setPosts({ posts: sortedPosts }));
   };
 
   const getUserPosts = async () => {
@@ -26,7 +27,8 @@ const PostsWidget = ({ userId, isProfile = false }) => {
       }
     );
     const data = await response.json();
-    dispatch(setPosts({ posts: data }));
+    const sortedPosts = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    dispatch(setPosts({ posts: sortedPosts }));
   };
 
   useEffect(() => {
